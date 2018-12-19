@@ -20,9 +20,7 @@ class CompanyProfileViewController: UIViewController {
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
         self.view.layer.insertSublayer(gradient, at: 0)
-        // Do any additional setup after loading the view.
     }
     
     func hexStringToUIColor (hex:String) -> UIColor {
@@ -46,17 +44,6 @@ class CompanyProfileViewController: UIViewController {
             alpha: CGFloat(1.0)
         )
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 extension CompanyProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

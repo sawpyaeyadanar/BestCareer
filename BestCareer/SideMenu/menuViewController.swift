@@ -7,35 +7,35 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var userNamelbl: UILabel!
     @IBOutlet weak var tblTableView: UITableView!
-    @IBOutlet weak var imgProfile: UIImageView!
+    //@IBOutlet weak var imgProfile: UIImageView!
     
     var ManuNameArray:Array = [String]()
     var iconArray:Array = [UIImage]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        ManuNameArray = ["Home","Message","Map","Setting"]
-        iconArray = [UIImage(named:"home")!,UIImage(named:"message")!,UIImage(named:"map")!,UIImage(named:"setting")!]
-        
-        imgProfile.layer.borderWidth = 2
-        imgProfile.layer.borderColor = UIColor.green.cgColor
-        imgProfile.layer.cornerRadius = 50
-        
-        imgProfile.layer.masksToBounds = false
-        imgProfile.clipsToBounds = true
+        ManuNameArray = ["Home","Favourite","Search","About","Logout"]
+        iconArray = [UIImage(named:"home-filled")!,UIImage(named:"heart-outline")!,UIImage(named:"search")!,UIImage(named:"about")!,UIImage(named:"signout")!]
+        let name = UserDefaults.standard.string(forKey: "username") ?? ""
+        userNamelbl.text = name
+//        imgProfile.layer.borderWidth = 2
+//        imgProfile.layer.borderColor = UIColor.green.cgColor
+//        imgProfile.layer.cornerRadius = 50
+//        
+//        imgProfile.layer.masksToBounds = false
+//        imgProfile.clipsToBounds = true
         tblTableView.tableFooterView = UIView()
         let gradient: CAGradientLayer = CAGradientLayer()
-        
         gradient.colors = [UIColor.colorFromHex("#9a2163").cgColor,
                            UIColor.colorFromHex("#000000").cgColor]
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
         self.view.layer.insertSublayer(gradient, at: 0)
         // Do any additional setup after loading the view.
     }
@@ -53,12 +53,12 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         cell.lblMenuname.text! = ManuNameArray[indexPath.row]
         cell.imgIcon.image = iconArray[indexPath.row]
-        
+        cell.backgroundColor = UIColor.clear
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         let revealviewcontroller:SWRevealViewController = self.revealViewController()
         
         let cell:MenuCell = tableView.cellForRow(at: indexPath) as! MenuCell
@@ -69,7 +69,6 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
             let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-            
             revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
             
         }
@@ -91,6 +90,18 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //        {
 //           print("setting Tapped")
 //        }
+        if cell.lblMenuname.text! == "Logout"
+        {
+            try! Auth.auth().signOut()
+            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
+           //error self.present(newViewcontroller, animated: false, completion: nil)
+            newFrontController.navigationBar.isHidden = true
+          revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
+           //revealviewcontroller.setFront(newFrontController, animated: true)
+         //   self.navigationController?.setViewControllers([newViewcontroller], animated: false)
+        }
     }
     /*
     // MARK: - Navigation

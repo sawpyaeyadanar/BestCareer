@@ -58,3 +58,49 @@ extension UIColor {
    
 }
 
+@IBDesignable extension UIButton {
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
+    }
+    @IBInspectable var cornerRadius: CGFloat {
+        set {
+            layer.cornerRadius = newValue
+        }
+        get {
+            return layer.cornerRadius
+        }
+    }
+    @IBInspectable var borderColor: UIColor? {
+        set{
+            guard let uiColor = newValue else {
+                return
+            }
+            layer.borderColor = uiColor.cgColor
+        }
+        get {
+            guard let color = layer.borderColor else {
+                return nil
+            }
+            return UIColor(cgColor: color)
+        }
+    }
+}
+
+extension NSMutableAttributedString {
+    
+    func setColorForText(textForAttribute: String, withColor color: UIColor) {
+        let range: NSRange = self.mutableString.range(of: textForAttribute, options: .caseInsensitive)
+        
+        // Swift 4.2 and above
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        
+        // Swift 4.1 and below
+        //self.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: range)
+    }
+    
+}

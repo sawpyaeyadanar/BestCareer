@@ -69,7 +69,6 @@ class Categories {
         }
     }
     
-    
 }
 
 class CategoriesViewController: UIViewController {
@@ -86,8 +85,8 @@ class CategoriesViewController: UIViewController {
         }
         let gradient: CAGradientLayer = CAGradientLayer()
         
-        gradient.colors = [hexStringToUIColor(hex: "#9a2163").cgColor,
-                           hexStringToUIColor(hex: "#000000").cgColor]
+        gradient.colors = [UIColor.colorFromHex("#9a2163").cgColor,
+                           UIColor.colorFromHex("#000000").cgColor]
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
@@ -95,29 +94,6 @@ class CategoriesViewController: UIViewController {
         
         self.view.layer.insertSublayer(gradient, at: 0)
     }
-
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if ((cString.count) != 6) {
-            return UIColor.gray
-        }
-        
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-    
 
 }
 extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource {

@@ -14,6 +14,7 @@ class MenuCell: UITableViewCell {
     @IBOutlet weak var imgIcon: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = UIColor.clear
         // Initialization code
     }
 

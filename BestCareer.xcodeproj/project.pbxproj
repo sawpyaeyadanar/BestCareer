@@ -17,6 +17,10 @@
 		497B180F21C4190300919D8E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B180E21C4190300919D8E /* LoginViewController.swift */; };
 		497B181121C41FDD00919D8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 497B181021C41FDD00919D8E /* GoogleService-Info.plist */; };
 		497B684421CA2EE300A20C2B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B684321CA2EE300A20C2B /* SignUpViewController.swift */; };
+		49948AC121CB9D7900487444 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49948AC021CB9D7900487444 /* Login.storyboard */; };
+		49E2A65A21CCA6D500C50B85 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E2A65921CCA6D500C50B85 /* LeftViewController.swift */; };
+		49E2A65C21CCEDCF00C50B85 /* JobPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E2A65B21CCEDCF00C50B85 /* JobPostsViewController.swift */; };
+		49E2A65E21CCEE2900C50B85 /* JobPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E2A65D21CCEE2900C50B85 /* JobPostCell.swift */; };
 		49ECF55821C569C200B0F994 /* CompanyJobPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECF55621C569C200B0F994 /* CompanyJobPostsViewController.swift */; };
 		49ECF55921C569C200B0F994 /* CompanyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECF55721C569C200B0F994 /* CompanyProfileViewController.swift */; };
 		C8F8D71021C8D931001B1151 /* CompanyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D70F21C8D931001B1151 /* CompanyInfoViewController.swift */; };
@@ -26,9 +30,7 @@
 		C8F8D71821C8DC9C001B1151 /* MenuTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D71721C8DC9B001B1151 /* MenuTabsView.swift */; };
 		C8F8D71C21C8DD9D001B1151 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D71B21C8DD9D001B1151 /* BasicCell.swift */; };
 		C8F8D71E21C8DDEF001B1151 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D71D21C8DDEF001B1151 /* Extensions.swift */; };
-		C8F8D72721C8F10B001B1151 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D72121C8F10A001B1151 /* SWRevealViewController.m */; };
 		C8F8D72821C8F10B001B1151 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D72321C8F10A001B1151 /* menuViewController.swift */; };
-		C8F8D72921C8F10B001B1151 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D72421C8F10B001B1151 /* MessageViewController.swift */; };
 		C8F8D72A21C8F10B001B1151 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F8D72621C8F10B001B1151 /* MenuCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,10 @@
 		497B180E21C4190300919D8E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		497B181021C41FDD00919D8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		497B684321CA2EE300A20C2B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		49948AC021CB9D7900487444 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		49E2A65921CCA6D500C50B85 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		49E2A65B21CCEDCF00C50B85 /* JobPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobPostsViewController.swift; sourceTree = "<group>"; };
+		49E2A65D21CCEE2900C50B85 /* JobPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobPostCell.swift; sourceTree = "<group>"; };
 		49ECF55621C569C200B0F994 /* CompanyJobPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyJobPostsViewController.swift; sourceTree = "<group>"; };
 		49ECF55721C569C200B0F994 /* CompanyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyProfileViewController.swift; sourceTree = "<group>"; };
 		B2B11395039A3B49421AD277 /* Pods-BestCareer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BestCareer.release.xcconfig"; path = "Pods/Target Support Files/Pods-BestCareer/Pods-BestCareer.release.xcconfig"; sourceTree = "<group>"; };
@@ -55,12 +61,8 @@
 		C8F8D71721C8DC9B001B1151 /* MenuTabsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTabsView.swift; sourceTree = "<group>"; };
 		C8F8D71B21C8DD9D001B1151 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
 		C8F8D71D21C8DDEF001B1151 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		C8F8D72121C8F10A001B1151 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		C8F8D72321C8F10A001B1151 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
-		C8F8D72421C8F10B001B1151 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		C8F8D72521C8F10B001B1151 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		C8F8D72621C8F10B001B1151 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		C8F8D72F21C8F7AF001B1151 /* BestCareer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BestCareer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F0C6EFA8001D1BB54A479A95 /* Pods_BestCareer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestCareer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,9 @@
 				C8F8D71321C8DA46001B1151 /* CompanyPostsViewController.swift */,
 				C8F8D71521C8DAFA001B1151 /* PageControllerVC.swift */,
 				497B684321CA2EE300A20C2B /* SignUpViewController.swift */,
+				49948AC021CB9D7900487444 /* Login.storyboard */,
+				49E2A65B21CCEDCF00C50B85 /* JobPostsViewController.swift */,
+				49E2A65D21CCEE2900C50B85 /* JobPostCell.swift */,
 			);
 			path = BestCareer;
 			sourceTree = "<group>";
@@ -149,12 +154,9 @@
 		C8F8D72021C8F0C5001B1151 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				C8F8D72F21C8F7AF001B1151 /* BestCareer-Bridging-Header.h */,
+				49E2A65921CCA6D500C50B85 /* LeftViewController.swift */,
 				C8F8D72621C8F10B001B1151 /* MenuCell.swift */,
 				C8F8D72321C8F10A001B1151 /* menuViewController.swift */,
-				C8F8D72421C8F10B001B1151 /* MessageViewController.swift */,
-				C8F8D72521C8F10B001B1151 /* SWRevealViewController.h */,
-				C8F8D72121C8F10A001B1151 /* SWRevealViewController.m */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -171,7 +173,6 @@
 				4940C32D21C26869008881F4 /* Frameworks */,
 				4940C32E21C26869008881F4 /* Resources */,
 				49A42050413CE6B9C19DB3C6 /* [CP] Embed Pods Frameworks */,
-				3DED13441088F56920500706 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,6 +225,7 @@
 				4940C33E21C2686A008881F4 /* LaunchScreen.storyboard in Resources */,
 				497B181121C41FDD00919D8E /* GoogleService-Info.plist in Resources */,
 				4940C33B21C2686A008881F4 /* Assets.xcassets in Resources */,
+				49948AC121CB9D7900487444 /* Login.storyboard in Resources */,
 				4940C33921C26869008881F4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,21 +233,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3DED13441088F56920500706 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BestCareer/Pods-BestCareer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		49A42050413CE6B9C19DB3C6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,19 +296,20 @@
 			files = (
 				49ECF55821C569C200B0F994 /* CompanyJobPostsViewController.swift in Sources */,
 				C8F8D72A21C8F10B001B1151 /* MenuCell.swift in Sources */,
-				C8F8D72721C8F10B001B1151 /* SWRevealViewController.m in Sources */,
 				497B180F21C4190300919D8E /* LoginViewController.swift in Sources */,
 				4940C34821C26A31008881F4 /* CategoriesCollectionViewCell.swift in Sources */,
+				49E2A65E21CCEE2900C50B85 /* JobPostCell.swift in Sources */,
 				C8F8D71021C8D931001B1151 /* CompanyInfoViewController.swift in Sources */,
 				497B684421CA2EE300A20C2B /* SignUpViewController.swift in Sources */,
 				C8F8D71C21C8DD9D001B1151 /* BasicCell.swift in Sources */,
 				C8F8D72821C8F10B001B1151 /* menuViewController.swift in Sources */,
 				C8F8D71221C8DA2C001B1151 /* CompanyDetailsViewController.swift in Sources */,
 				C8F8D71421C8DA46001B1151 /* CompanyPostsViewController.swift in Sources */,
+				49E2A65A21CCA6D500C50B85 /* LeftViewController.swift in Sources */,
 				C8F8D71821C8DC9C001B1151 /* MenuTabsView.swift in Sources */,
 				4940C34621C268FC008881F4 /* CategoriesViewController.swift in Sources */,
 				4940C33421C26869008881F4 /* AppDelegate.swift in Sources */,
-				C8F8D72921C8F10B001B1151 /* MessageViewController.swift in Sources */,
+				49E2A65C21CCEDCF00C50B85 /* JobPostsViewController.swift in Sources */,
 				49ECF55921C569C200B0F994 /* CompanyProfileViewController.swift in Sources */,
 				C8F8D71621C8DAFA001B1151 /* PageControllerVC.swift in Sources */,
 				C8F8D71E21C8DDEF001B1151 /* Extensions.swift in Sources */,
@@ -472,8 +460,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D4QU9B59EM;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BestCareer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -482,7 +470,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bestcareer.jobs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BestCareer/SideMenu/BestCareer-Bridging-Header.h";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -495,8 +484,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D4QU9B59EM;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BestCareer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -505,7 +494,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bestcareer.jobs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BestCareer/SideMenu/BestCareer-Bridging-Header.h";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -10,6 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import Firebase
 import SkyFloatingLabelTextField
+import LGSideMenuController
 class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     //secret id //1d134536f12fc2b3a58bac3e0a31b2c4
   
@@ -19,8 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecog
     @IBOutlet weak var signuplbl: UILabel!
     @IBOutlet weak var loginBtn: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func setup() {
         userNameField.delegate = self
         passwordField.delegate = self
         loginBtn.backgroundColor = UIColor.clear
@@ -48,6 +48,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecog
         self.view.layer.insertSublayer(gradient, at: 0)
     }
     
+    func addAuthenticationListener() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let _ =  user {
+                self.navToHome()
+            }   
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        addAuthenticationListener()
+    }
+    
+    
+    
     @objc func didTapLabelDemo(sender: UITapGestureRecognizer)
     {
         print("you tapped label \(sender)")
@@ -62,25 +77,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecog
         //label.attributedText = attributedString
     
     }
+    
+    func navToHome() {
+        let sb =  UIStoryboard(name: "Main", bundle: nil)
+        if  let homeVC = sb.instantiateInitialViewController() as?  LGSideMenuController {
+            present(homeVC, animated: true, completion: nil)
+        }
+    }
     @IBAction func clickLogin(_ sender: Any) {
         dismissKeyboard()
         Auth.auth().signIn(withEmail: self.userNameField.text!, password: self.passwordField.text!) { (user, error ) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            if user != nil {
-            }
-            if let name = self.userNameField.text!.components(separatedBy: CharacterSet(charactersIn: ("@0123456789"))).first {
-               UserDefaults.standard.set(name, forKey: "username")
-            }
-            
-            self.performSegue(withIdentifier: "loginsegue", sender: nil)
+
         }
     }
     
     @IBAction func loginWithFB(_ sender: UIButton) {
         let categoriesVC = CategoriesViewController()
+        self.navToHome()
 //        self.present(categoriesVC, animated: false, completion: nil)
 //        self.navigationController?.setViewControllers([categoriesVC], animated: false)
 //         self.navigationController?.pushViewController(categoriesVC, animated: false)
@@ -130,3 +143,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecog
         self.view.endEditing(true)
     }
 }
+
+
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }
+//            if user != nil {
+//            }
+//            if let name = self.userNameField.text!.components(separatedBy: CharacterSet(charactersIn: ("@0123456789"))).first {
+//               UserDefaults.standard.set(name, forKey: "username")
+//            }
+//            self.navToHome()
+
+// self.performSegue(withIdentifier: "loginsegue", sender: nil)

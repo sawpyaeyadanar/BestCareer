@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import FirebaseAuth
+ 
+import Firebase
 class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var userNamelbl: UILabel!
@@ -16,6 +17,19 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     var ManuNameArray:Array = [String]()
     var iconArray:Array = [UIImage]()
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ManuNameArray = ["Home","Favourite","Search","About","Logout"]
@@ -59,58 +73,44 @@ class menuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let revealviewcontroller:SWRevealViewController = self.revealViewController()
-        
-        let cell:MenuCell = tableView.cellForRow(at: indexPath) as! MenuCell
-        print(cell.lblMenuname.text!)
-        if cell.lblMenuname.text! == "Home"
-        {
-            print("Home Tapped")
-            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
-            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-            revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
-            
-        }
-//        if cell.lblMenuname.text! == "Message"
+//        
+//        let cell:MenuCell = tableView.cellForRow(at: indexPath) as! MenuCell
+//        print(cell.lblMenuname.text!)
+//        if cell.lblMenuname.text! == "Home"
 //        {
-//            print("message Tapped")
-//           
+//            print("Home Tapped")
 //            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+//            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
 //            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
 //            
-//            revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
 //        }
-//        if cell.lblMenuname.text! == "Map"
+//        if cell.lblMenuname.text! == "Logout"
 //        {
-//            print("Map Tapped")
+//            try! Auth.auth().signOut()
+//            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
+//            newFrontController.navigationBar.isHidden = true
+//           //revealviewcontroller.setFront(newFrontController, animated: true)
+//         //   self.navigationController?.setViewControllers([newViewcontroller], animated: false)
 //        }
-//        if cell.lblMenuname.text! == "Setting"
-//        {
-//           print("setting Tapped")
-//        }
-        if cell.lblMenuname.text! == "Logout"
-        {
-            try! Auth.auth().signOut()
-            let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-           //error self.present(newViewcontroller, animated: false, completion: nil)
-            newFrontController.navigationBar.isHidden = true
-          revealviewcontroller.pushFrontViewController(newFrontController, animated: true)
-           //revealviewcontroller.setFront(newFrontController, animated: true)
-         //   self.navigationController?.setViewControllers([newViewcontroller], animated: false)
+        
+        let mainViewController = sideMenuController
+        let navCtrl = mainViewController?.rootViewController as? UINavigationController
+        let exeStoryBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        switch indexPath.row {
+        case 0:if let vc = exeStoryBoard.instantiateViewController(withIdentifier: "CategoriesViewController") as?      CategoriesViewController {
+            navCtrl?.pushViewController(vc, animated: true)
+        }
+        mainViewController?.hideLeftView( animated: true, completionHandler: nil)
+        case 4:do {
+            try Auth.auth().signOut()
+            mainViewController?.dismiss(animated: true, completion: nil)
+        } catch {
+            print("Error in logout")
+            }
+        default:break;
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

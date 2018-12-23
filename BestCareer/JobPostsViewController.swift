@@ -9,21 +9,27 @@
 import UIKit
 
 class JobPostsViewController: UIViewController {
+    
+    var jobCategory:Categories!
+    
     @IBOutlet weak var jobPosts: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+     //   addJobObserver( )
+        
     }
 }
 
 extension JobPostsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return jobCategory.posts?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "jobpostcell", for: indexPath)
+        
         return cell
     }
     

@@ -10,14 +10,30 @@ import UIKit
 import LGSideMenuController
 import Firebase
 
-
+class JobPost{
+    var id:String
+    var title:String
+    var companyid:String
+    
+    init(id:String, title:String, companyid:String) {
+        self.id = id
+        self.title = title
+        self.companyid = companyid 
+    }
+    
+    
+}
 class Categories {
+    
     var name:String?
     var id:String?
     var count:Int = 0
     static var all = Categories()
-
     
+    var posts:[JobPost]?
+    func getPostingForCompany(id:String)->[JobPost]{
+        
+    }
     /*
      Accounting/Finance
      Administrative
@@ -83,7 +99,7 @@ class CategoriesViewController: UIViewController {
 
     @IBOutlet weak var catagoriesCollectionView: UICollectionView!
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
-    let CategoriesObj = Categories()
+    
     var jobCategories = [Categories]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,11 +156,26 @@ extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoriesID", for: indexPath) as? CategoriesCollectionViewCell
         cell?.descriptionLabel.text = currentCat.name
         //cell?.jobCount.text = String(describing:  currentCat.count)
-        cell?.update(currentCat)
+        cell?.update(currentCat, callBack: { ( posts ) in
+            currentCat.posts = posts
+        })
         return cell ?? UICollectionViewCell();
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let theJobCat = self.jobCategories[indexPath.row]
+        //print(theJobCat.posts?.count)
+          performSegue(withIdentifier: "jobpostsegue", sender: theJobCat)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "jobpostsegue": let destVC =  segue.destination as? JobPostsViewController
+        destVC?.jobCategory = sender as? Categories
+        default:()
+        }
+    }
     
 }
 /*

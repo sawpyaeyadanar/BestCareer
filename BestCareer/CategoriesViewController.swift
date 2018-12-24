@@ -7,13 +7,33 @@
 //
 
 import UIKit
+import LGSideMenuController
+import Firebase
 
+class JobPost{
+    var id:String
+    var title:String
+    var companyid:String
+    
+    init(id:String, title:String, companyid:String) {
+        self.id = id
+        self.title = title
+        self.companyid = companyid 
+    }
+    
+    
+}
 class Categories {
+    
     var name:String?
     var id:String?
+    var count:Int = 0
     static var all = Categories()
-
     
+    var posts:[JobPost]?
+    func getPostingForCompany(id:String)->[JobPost]{
+        
+    }
     /*
      Accounting/Finance
      Administrative
@@ -61,6 +81,10 @@ class Categories {
         types.append("Education/Teaching/Childcare")
         types.append("Engineering/Technical")
     }
+    init(id:String, name:String){
+        self.id = id
+        self.name = name
+    }
     
     func insertType() {
         for (index,data) in types.enumerated() {
@@ -75,14 +99,13 @@ class CategoriesViewController: UIViewController {
 
     @IBOutlet weak var catagoriesCollectionView: UICollectionView!
     @IBOutlet weak var btnMenuButton: UIBarButtonItem!
-    let CategoriesObj = Categories()
+    
+    var jobCategories = [Categories]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        CategoriesObj.insertType()
-        if revealViewController() != nil {
-            btnMenuButton.target = revealViewController()
-            btnMenuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-        }
+        
+        
+ 
         let gradient: CAGradientLayer = CAGradientLayer()
         
         gradient.colors = [UIColor.colorFromHex("#9a2163").cgColor,
@@ -93,21 +116,66 @@ class CategoriesViewController: UIViewController {
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         
         self.view.layer.insertSublayer(gradient, at: 0)
+        //CategoriesObj.insertType()
+        setCategoryObserver()
     }
-
+    
+    func setCategoryObserver( ){
+        
+        let dbRef = Database.database().reference()
+        let catRef = dbRef.child("Categories")
+        catRef.observe(.value) { (ss) in
+            // print(ss)
+            if let cats = ss.value as? [String:Any] {
+                self.jobCategories.removeAll()
+                for (k,cat) in cats {
+                    
+                    let theCategoryDict = cat as? [String:Any]
+                    let catName = (theCategoryDict?["name"] as? String) ?? "Unknown"
+                    let catId = (theCategoryDict?["id"] as? String   ) ?? "UnknownID"
+                    let theCat = Categories(id: catId,  name : catName)
+                    self.jobCategories.append(theCat)
+                }
+                self.catagoriesCollectionView.reloadData()
+            }
+        }
+    }
+    
+    @IBAction func showSideMenu(_ sender: UIBarButtonItem) {
+        sideMenuController?.showLeftView(animated: true, completionHandler: nil)
+    }
+    
 }
 extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CategoriesObj.types.count;
+        return jobCategories.count;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let currentCat =  jobCategories[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoriesID", for: indexPath) as? CategoriesCollectionViewCell
-        cell?.descriptionLabel.text = CategoriesObj.types[indexPath.row]
-        cell?.jobCount.text = "218"
+        cell?.descriptionLabel.text = currentCat.name
+        //cell?.jobCount.text = String(describing:  currentCat.count)
+        cell?.update(currentCat, callBack: { ( posts ) in
+            currentCat.posts = posts
+        })
         return cell ?? UICollectionViewCell();
+        
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let theJobCat = self.jobCategories[indexPath.row]
+        //print(theJobCat.posts?.count)
+          performSegue(withIdentifier: "jobpostsegue", sender: theJobCat)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "jobpostsegue": let destVC =  segue.destination as? JobPostsViewController
+        destVC?.jobCategory = sender as? Categories
+        default:()
+        }
+    }
     
 }
 /*

@@ -21,7 +21,12 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         
         jobRef.observe(.value) { (ss) in
             
+            if (ss.children.allObjects.count > 0){
                 self.jobCount.text = String(describing: ss.children.allObjects.count)
+            }else{
+                self.jobCount.isHidden = true
+            }
+            
             var jobposts = [JobPost]()
             for obj in ss.children.allObjects as! [DataSnapshot] {
                 
@@ -31,9 +36,15 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
                 let id = obj.key
                 if let companyid  = companyid , let name = name {
                     let jobpost = JobPost(id: id, title: name, companyid: String(companyid))
+                    jobpost.empType = theDict?["empType"] as? String ?? ""
+                    jobpost.gender = theDict?["gender"] as? String ?? ""
+                    jobpost.location = theDict?["location"] as? String ?? ""
+                    jobpost.requirements = theDict?["requirements"] as? String ?? ""
+                    jobpost.jobdescription = theDict?["description"] as? String ?? ""
+                    jobpost.salary = theDict?["salary"] as? String ?? ""
+                    jobpost.workingHour = theDict?["workingHour"] as? String ?? ""
                     jobposts.append(jobpost)
                 }
-                
             }
             callBack(jobposts)
             
@@ -42,3 +53,5 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         //let recentPostsQuery = (ref?.child("posts").queryLimited(toFirst: 100))!
     }
 }
+
+

@@ -15,5 +15,6 @@ target 'BestCareer' do
   pod 'BadgeSwift', '~> 7.0'
   #pod 'TextFieldEffects'
   pod 'SkyFloatingLabelTextField'
+  pod 'SVProgressHUD'
 
 end

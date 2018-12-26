@@ -86,6 +86,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - SkyFloatingLabelTextField (3.6.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - BadgeSwift (~> 7.0)
@@ -96,6 +97,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - LGSideMenuController
   - SkyFloatingLabelTextField
+  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -118,6 +120,7 @@ SPEC REPOS:
     - LGSideMenuController
     - nanopb
     - SkyFloatingLabelTextField
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   BadgeSwift: 5cfacfad916d85e2f68d93dbb9ade4e9555903da
@@ -139,7 +142,8 @@ SPEC CHECKSUMS:
   LGSideMenuController: ae40c80983ab8b8801c7cef0a6804d43aaa72d45
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 51947c5a2a545c19b102f97dfd5cb66baef91bd7
+PODFILE CHECKSUM: 1ef246b3bef263917fa241a0ff6abe9cfe07a54e
 
 COCOAPODS: 1.5.3

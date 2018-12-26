@@ -11,6 +11,7 @@ import FBSDKLoginKit
 import Firebase
 import SkyFloatingLabelTextField
 import LGSideMenuController
+import SVProgressHUD
 class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     //secret id //1d134536f12fc2b3a58bac3e0a31b2c4
   
@@ -44,13 +45,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecog
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
         self.view.layer.insertSublayer(gradient, at: 0)
     }
     
     func addAuthenticationListener() {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let _ =  user {
+                print("addStateDidChangee")
+                SVProgressHUD.dismiss()
                 self.navToHome()
             }   
         }
@@ -86,8 +88,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIGestureRecog
     }
     @IBAction func clickLogin(_ sender: Any) {
         dismissKeyboard()
+        //SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show()
         Auth.auth().signIn(withEmail: self.userNameField.text!, password: self.passwordField.text!) { (user, error ) in
-
+            print("login success")
         }
     }
     

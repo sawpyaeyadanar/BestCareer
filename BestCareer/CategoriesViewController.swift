@@ -14,11 +14,27 @@ class JobPost{
     var id:String
     var title:String
     var companyid:String
+    var empType: String
+    var gender:String
+    var location:String
+    var requirements: String
+    var salary: String
+    var workingHour:String
+    var jobdescription:String
+
+    
     
     init(id:String, title:String, companyid:String) {
         self.id = id
         self.title = title
-        self.companyid = companyid 
+        self.companyid = companyid
+        self.empType = ""
+        self.gender = "Female"
+        self.location = ""
+        self.requirements = ""
+        self.salary = ""
+        self.workingHour = ""
+        self.jobdescription = ""
     }
     
     
@@ -28,11 +44,14 @@ class Categories {
     var name:String?
     var id:String?
     var count:Int = 0
-    static var all = Categories()
+  //  static var all = Categories()
     
-    var posts:[JobPost]?
+    var posts:[JobPost]
     func getPostingForCompany(id:String)->[JobPost]{
-        
+//        for data in Categories {
+//        print(data.posts)
+//        }
+        return posts ?? []
     }
     /*
      Accounting/Finance
@@ -70,28 +89,29 @@ class Categories {
      Others
  
  */
-    var types = [String]()
-    init() {
-        types.append("Accounting/Finance")
-        types.append("Administrative")
-        types.append("Consulting")
-        types.append("Customer Service/Support")
-        types.append("Design/Architecture")
-        types.append("Driver/Security/Cleaning")
-        types.append("Education/Teaching/Childcare")
-        types.append("Engineering/Technical")
-    }
+//    var types = [String]()
+//    init() {
+//        types.append("Accounting/Finance")
+//        types.append("Administrative")
+//        types.append("Consulting")
+//        types.append("Customer Service/Support")
+//        types.append("Design/Architecture")
+//        types.append("Driver/Security/Cleaning")
+//        types.append("Education/Teaching/Childcare")
+//        types.append("Engineering/Technical")
+//    }
     init(id:String, name:String){
         self.id = id
         self.name = name
+        posts = [JobPost]()
     }
     
-    func insertType() {
-        for (index,data) in types.enumerated() {
-            self.name = data
-            self.id = String(describing: index)
-        }
-    }
+//    func insertType() {
+//        for (index,data) in types.enumerated() {
+//            self.name = data
+//            self.id = String(describing: index)
+//        }
+//    }
     
 }
 
@@ -103,11 +123,7 @@ class CategoriesViewController: UIViewController {
     var jobCategories = [Categories]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
- 
         let gradient: CAGradientLayer = CAGradientLayer()
-        
         gradient.colors = [UIColor.colorFromHex("#9a2163").cgColor,
                            UIColor.colorFromHex("#000000").cgColor]
         gradient.locations = [0.0 , 1.0]
@@ -119,26 +135,40 @@ class CategoriesViewController: UIViewController {
         //CategoriesObj.insertType()
         setCategoryObserver()
     }
-    
+
     func setCategoryObserver( ){
-        
-        let dbRef = Database.database().reference()
-        let catRef = dbRef.child("Categories")
-        catRef.observe(.value) { (ss) in
-            // print(ss)
-            if let cats = ss.value as? [String:Any] {
+        ServerManager.shared.getData(childName: "Categories") { (snapshots) in
+            if let cats = snapshots as? [String:Any] {
                 self.jobCategories.removeAll()
                 for (k,cat) in cats {
-                    
                     let theCategoryDict = cat as? [String:Any]
                     let catName = (theCategoryDict?["name"] as? String) ?? "Unknown"
                     let catId = (theCategoryDict?["id"] as? String   ) ?? "UnknownID"
                     let theCat = Categories(id: catId,  name : catName)
+                    
                     self.jobCategories.append(theCat)
                 }
                 self.catagoriesCollectionView.reloadData()
             }
         }
+        
+//        let dbRef = Database.database().reference()
+//        let catRef = dbRef.child("Categories")
+//        catRef.observe(.value) { (ss) in
+//            // print(ss)
+//            if let cats = ss.value as? [String:Any] {
+//                self.jobCategories.removeAll()
+//                for (k,cat) in cats {
+//
+//                    let theCategoryDict = cat as? [String:Any]
+//                    let catName = (theCategoryDict?["name"] as? String) ?? "Unknown"
+//                    let catId = (theCategoryDict?["id"] as? String   ) ?? "UnknownID"
+//                    let theCat = Categories(id: catId,  name : catName)
+//                    self.jobCategories.append(theCat)
+//                }
+//                self.catagoriesCollectionView.reloadData()
+//            }
+//        }
     }
     
     @IBAction func showSideMenu(_ sender: UIBarButtonItem) {
@@ -155,7 +185,7 @@ extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDa
         let currentCat =  jobCategories[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoriesID", for: indexPath) as? CategoriesCollectionViewCell
         cell?.descriptionLabel.text = currentCat.name
-        //cell?.jobCount.text = String(describing:  currentCat.count)
+       
         cell?.update(currentCat, callBack: { ( posts ) in
             currentCat.posts = posts
         })
@@ -165,14 +195,16 @@ extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let theJobCat = self.jobCategories[indexPath.row]
-        //print(theJobCat.posts?.count)
+        if (theJobCat.posts.count > 0){
           performSegue(withIdentifier: "jobpostsegue", sender: theJobCat)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "jobpostsegue": let destVC =  segue.destination as? JobPostsViewController
         destVC?.jobCategory = sender as? Categories
+        
         default:()
         }
     }

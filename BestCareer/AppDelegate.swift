@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import SVProgressHUD
+import LGSideMenuController
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     //#9a2163
@@ -19,10 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        Database.database().isPersistenceEnabled = true 
+        Database.database().isPersistenceEnabled = true
+        SVProgressHUD.setDefaultMaskType(.custom)
+        SVProgressHUD.setForegroundColor(UIColor.black)
+       // SVProgressHUD.setBackgroundColor(UIColor.cyan)
+        
         return true
     }
-    
+
 //    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
 //        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
 //    }
